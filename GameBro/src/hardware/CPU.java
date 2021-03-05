@@ -57,7 +57,7 @@ public class CPU {
 	*/
 	
 	//Read and Write of registers
-	public int readReg8(int register) { //Use this to access SP and PC as well
+	public int readReg8(int register) {
 		return registers[register];
 	}
 	public int readReg16(int register) {

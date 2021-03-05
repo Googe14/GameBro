@@ -20,26 +20,26 @@ public class Clock implements Runnable {
 	
 	public double speed = 1;
 	
-	public boolean running = false;
+	public boolean running = false; //Exit condition for loop
 	public void loop() {
-		double spc = 1/CPS; //Second per cycle
 		double last = System.currentTimeMillis(); 
-		int cycles = 0; //What cycle
+		int cycles = 0; //Cycle the clock is currently up to
 		
 		running = true;
 		while(running) { //Loop
 
 			double t = System.currentTimeMillis() - last; //Time this second
-			int targetCycles = (int)(t*speed/1000 * (double)CPS); //Cycles we should be at by this second
+			int targetCycles = (int)(t*speed/1000 * (double)CPS); //Cycles we should be at by this time
 
 			if(cycles > targetCycles) continue; //Wait until we have cycles to do
-			if(t > 1000) { //Reset value to avoid overflow
+			if(t > 1000) { //Reset values to avoid overflow
+				if(cycles > CPS) System.out.println("More cycles than intended: " + cycles);
 				cycles %= CPS;
 				last = System.currentTimeMillis();
 			}
 
 			//************Do a cycle
-			if(!cpu.go()) running = false;
+			if(!cpu.go()) running = false; //Step the CPU, if it encounters a problem then stop the clock
 			
 			//Tell other hardware to go
 

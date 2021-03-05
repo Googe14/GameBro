@@ -15,10 +15,11 @@ public class PPU extends JPanel {
 		
 		screen = new BufferedImage(160, 144, BufferedImage.TYPE_INT_RGB);
 		this.setMinimumSize(new Dimension(160, 144));
+		this.setPreferredSize(new Dimension(160, 144));
 	}
 	
 	@Override
-	public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) { //Draw current image to JPanel
 		g.drawImage(screen, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 	
